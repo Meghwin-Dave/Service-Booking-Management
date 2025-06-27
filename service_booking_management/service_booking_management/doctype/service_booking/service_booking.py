@@ -29,23 +29,23 @@ class ServiceBooking(Document):
         # Check if workflow_state field exists and is set to 'Approved'
         if hasattr(self, 'workflow_state') and self.workflow_state == "Approved":
             # Get customer email (assuming customer is a link to Customer doctype with an email field)
-            # customer_email = None
-            # if hasattr(self, 'customer') and self.customer:
-            # 	customer_doc = frappe.get_doc("Customer", self.customer)
-            # 	customer_email = getattr(customer_doc, 'email_id', None) or "meghwindave04@gmail.com"
-            # # Fallback: try to get email from a field on this doc
-            # if not customer_email and hasattr(self, 'email_id'):
-            # 	customer_email = self.email_id
-            # if customer_email:
-            # 	frappe.sendmail(
-            # 		recipients=[customer_email],
-            # 		subject="Your Service Booking is Approved!",
-            # 		message="""
-            # 			<p>Dear Customer,</p>
-            # 			<p>Your service booking (ID: {name}) has been <b>approved</b>.</p>
-            # 			<p>Thank you for choosing us!</p>
-            # 			<p>--<br>Service Booking Team</p>
-            # 		""".format(name=self.name),
-            # 	)
+            customer_email = None
+            if hasattr(self, 'customer') and self.customer:
+                customer_doc = frappe.get_doc("Customer", self.customer)
+                customer_email = getattr(customer_doc, 'email_id', None) or "meghwindave04@gmail.com"
+            # Fallback: try to get email from a field on this doc
+            if not customer_email and hasattr(self, 'email_id'):
+                customer_email = self.email_id
+            if customer_email:
+                frappe.sendmail(
+                    recipients=[customer_email],
+                    subject="Your Service Booking is Approved!",
+                    message="""
+                        <p>Dear Customer,</p>
+                        <p>Your service booking (ID: {name}) has been <b>approved</b>.</p>
+                        <p>Thank you for choosing us!</p>
+                        <p>--<br>Service Booking Team</p>
+                    """.format(name=self.name),
+                )
 
             frappe.msgprint("Email sent to customer & Data sent to dummy webhook endpoint")
