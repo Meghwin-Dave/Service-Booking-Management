@@ -17,6 +17,8 @@ A Frappe app to manage service bookings with workflow, notifications, reporting,
 
 ## Installation
 
+Repo : https://github.com/Meghwin-Dave/Service-Booking-Management
+
 ```bash
 cd $PATH_TO_YOUR_BENCH
 bench get-app $URL_OF_THIS_REPO --branch develop
